@@ -74,14 +74,19 @@ body, a, button {
 }
 
 .topbar.is-compact {
-  width: fit-content;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
   margin-left: auto;
-  gap: 10px;
-  justify-content: flex-end;
-  padding: 10px 12px;
-  background: rgba(255, 247, 239, 0.9);
+  gap: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: rgba(255, 247, 239, 0.94);
   border-color: rgba(63, 42, 45, 0.08);
-  box-shadow: 0 12px 32px rgba(63, 42, 45, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgba(63, 42, 45, 0.12);
 }
 
 .topbar.is-hidden {
@@ -93,10 +98,12 @@ body, a, button {
 .topbar.is-compact .brand,
 .topbar.is-compact .nav,
 .topbar.is-compact .header-cta {
+  position: absolute;
   opacity: 0;
   width: 0;
   min-width: 0;
   max-width: 0;
+  height: 0;
   margin: 0;
   padding: 0;
   border-width: 0;
@@ -109,17 +116,13 @@ body, a, button {
 }
 
 .topbar.menu-open {
-  width: min(320px, calc(100vw - 24px));
-  gap: 14px;
-  padding: 12px;
-  border-radius: 24px;
-}
-
-.topbar.menu-open .brand,
-.topbar.menu-open .nav,
-.topbar.menu-open .header-cta {
-  width: auto;
-  max-width: none;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  gap: 0;
+  padding: 0;
+  border-radius: 999px;
 }
 
 .brand {
@@ -777,10 +780,13 @@ body, a, button {
   }
 
   .topbar.is-compact {
-    width: fit-content;
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    min-height: 48px;
     align-items: center;
-    padding: 10px 12px;
-    border-radius: var(--radius-full);
+    padding: 0;
+    border-radius: 999px;
   }
 
   .nav {
