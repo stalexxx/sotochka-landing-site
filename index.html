@@ -324,10 +324,30 @@
       const playButton = videoBlock?.querySelector('[data-video-play]');
 
       if (topbar) {
+        let lastScrollY = window.scrollY;
+
         const updateTopbar = () => {
-          const maxScroll = 220;
-          const progress = Math.min(window.scrollY / maxScroll, 1);
+          const currentY = window.scrollY;
+          const maxScroll = 160;
+          const progress = Math.min(currentY / maxScroll, 1);
+          const scrollingUp = currentY < lastScrollY;
+          const nearTop = currentY < 36;
+
           topbar.style.setProperty('--topbar-progress', progress.toFixed(3));
+
+          if (nearTop) {
+            topbar.classList.remove('is-compact', 'is-hidden');
+          } else {
+            topbar.classList.add('is-compact');
+
+            if (scrollingUp || currentY < 140) {
+              topbar.classList.remove('is-hidden');
+            } else {
+              topbar.classList.add('is-hidden');
+            }
+          }
+
+          lastScrollY = currentY;
         };
 
         updateTopbar();
