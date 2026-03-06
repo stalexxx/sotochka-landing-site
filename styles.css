@@ -625,7 +625,19 @@ body, a, button {
 }
 
 @media (max-width: 1080px) {
-  .hero,
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-media {
+    justify-content: flex-start;
+  }
+
+  .cover-card {
+    width: min(100%, 560px);
+  }
+
   .split,
   .result-panel,
   .teacher-panel,
