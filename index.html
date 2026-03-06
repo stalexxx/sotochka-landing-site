@@ -336,6 +336,7 @@
       const playButton = videoBlock?.querySelector('[data-video-play]');
 
       if (topbar) {
+        const mobileMq = window.matchMedia('(max-width: 720px)');
         let lastScrollY = window.scrollY;
 
         const closeMenu = () => {
@@ -344,6 +345,12 @@
         };
 
         const updateTopbar = () => {
+          if (mobileMq.matches) {
+            topbar.style.setProperty('--topbar-progress', '0');
+            topbar.classList.remove('is-compact', 'is-hidden');
+            return;
+          }
+
           const currentY = window.scrollY;
           const maxScroll = 160;
           const progress = Math.min(currentY / maxScroll, 1);
@@ -375,8 +382,23 @@
           if (open) topbar.classList.remove('is-hidden');
         });
 
+        document.addEventListener('click', (event) => {
+          if (!topbar.classList.contains('menu-open')) return;
+          if (topbar.contains(event.target)) return;
+          closeMenu();
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeMenu();
+        });
+
         topbarMenu?.querySelectorAll('a').forEach((link) => {
           link.addEventListener('click', closeMenu);
+        });
+
+        mobileMq.addEventListener?.('change', () => {
+          closeMenu();
+          updateTopbar();
         });
 
         updateTopbar();

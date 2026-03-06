@@ -754,6 +754,10 @@ body, a, button {
 }
 
 @media (max-width: 720px) {
+  body {
+    padding-top: 76px;
+  }
+
   .container {
     width: min(100vw - 24px, 1180px);
   }
@@ -771,23 +775,50 @@ body, a, button {
     grid-template-columns: 1fr;
   }
 
-  .topbar {
+  .topbar,
+  .topbar.is-compact,
+  .topbar.menu-open {
+    position: fixed;
     top: 8px;
-    grid-template-columns: auto auto;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    min-width: 0;
+    height: 56px;
+    min-height: 56px;
+    margin: 0;
+    padding: 0 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    padding: 10px 12px;
     border-radius: 999px;
+    transform: none;
+    opacity: 1;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
-  .topbar.is-compact {
-    width: 48px;
-    min-width: 48px;
-    height: 48px;
-    min-height: 48px;
+  .topbar.is-hidden {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .topbar.is-compact .brand,
+  .topbar.is-compact .nav,
+  .topbar.menu-open .brand,
+  .topbar.menu-open .nav {
+    position: static;
+    opacity: 1;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: auto;
     padding: 0;
-    border-radius: 999px;
+    overflow: visible;
+    pointer-events: auto;
   }
 
   .brand {
@@ -799,15 +830,18 @@ body, a, button {
     display: none;
   }
 
-  .burger {
+  .burger,
+  .topbar.is-compact .burger {
     display: inline-flex;
     position: static;
     transform: none;
   }
 
   .topbar-menu {
+    top: 72px;
     left: 12px;
-    width: min(280px, calc(100vw - 24px));
+    right: 12px;
+    width: auto;
   }
 
   .hero {
