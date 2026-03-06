@@ -26,7 +26,19 @@
           <a href="#teacher">Автор</a>
           <a href="#faq">FAQ</a>
         </nav>
-        <a class="button button-outline" href="https://stepik.org/course/92015/promo" target="_blank" rel="noreferrer">Открыть на Stepik</a>
+        <a class="button button-outline header-cta" href="https://stepik.org/course/92015/promo" target="_blank" rel="noreferrer">Открыть на Stepik</a>
+        <button class="burger" type="button" aria-label="Открыть навигацию" aria-expanded="false" data-burger>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="topbar-menu" data-topbar-menu>
+          <a href="#about">О курсе</a>
+          <a href="#program">Программа</a>
+          <a href="#teacher">Автор</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://stepik.org/course/92015/promo" target="_blank" rel="noreferrer">Открыть на Stepik</a>
+        </div>
       </header>
 
       <main>
@@ -319,12 +331,19 @@
 
     <script>
       const topbar = document.querySelector('[data-topbar]');
+      const burger = document.querySelector('[data-burger]');
+      const topbarMenu = document.querySelector('[data-topbar-menu]');
       const videoBlock = document.querySelector('[data-video-block]');
       const video = videoBlock?.querySelector('video');
       const playButton = videoBlock?.querySelector('[data-video-play]');
 
       if (topbar) {
         let lastScrollY = window.scrollY;
+
+        const closeMenu = () => {
+          topbar.classList.remove('menu-open');
+          burger?.setAttribute('aria-expanded', 'false');
+        };
 
         const updateTopbar = () => {
           const currentY = window.scrollY;
@@ -337,18 +356,30 @@
 
           if (nearTop) {
             topbar.classList.remove('is-compact', 'is-hidden');
+            closeMenu();
           } else {
             topbar.classList.add('is-compact');
 
-            if (scrollingUp || currentY < 140) {
+            if (scrollingUp || currentY < 140 || topbar.classList.contains('menu-open')) {
               topbar.classList.remove('is-hidden');
             } else {
               topbar.classList.add('is-hidden');
+              closeMenu();
             }
           }
 
           lastScrollY = currentY;
         };
+
+        burger?.addEventListener('click', () => {
+          const open = topbar.classList.toggle('menu-open');
+          burger.setAttribute('aria-expanded', String(open));
+          if (open) topbar.classList.remove('is-hidden');
+        });
+
+        topbarMenu?.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', closeMenu);
+        });
 
         updateTopbar();
         window.addEventListener('scroll', updateTopbar, { passive: true });
