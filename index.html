@@ -390,7 +390,7 @@
           videoBlock.classList.toggle('is-playing', !video.paused && !video.ended);
         };
 
-        playButton.addEventListener('click', async () => {
+        const toggleVideo = async () => {
           try {
             if (video.paused) {
               await video.play();
@@ -401,8 +401,10 @@
             console.error('Video playback failed', error);
           }
           syncState();
-        });
+        };
 
+        playButton.addEventListener('click', toggleVideo);
+        video.addEventListener('click', toggleVideo);
         video.addEventListener('play', syncState);
         video.addEventListener('pause', syncState);
         video.addEventListener('ended', syncState);
