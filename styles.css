@@ -142,9 +142,13 @@ body, a, button {
   letter-spacing: -0.05em;
 }
 
-.hero h1 {
-  max-width: 11ch;
-  font-size: clamp(3.6rem, 7vw, 6.6rem);
+.hero-title {
+  max-width: 12ch;
+  font-family: 'Literata', Georgia, serif;
+  font-size: clamp(2.9rem, 5.8vw, 4.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  font-weight: 700;
 }
 
 .hero-lead,
@@ -587,9 +591,10 @@ body, a, button {
     gap: 36px;
   }
 
-  .hero h1 {
+  .hero-title {
     max-width: none;
-    font-size: clamp(2.7rem, 13vw, 4rem);
+    font-size: clamp(2.35rem, 11vw, 3.4rem);
+    line-height: 1.08;
   }
 
   .section {
