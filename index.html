@@ -18,7 +18,7 @@
   </head>
   <body>
     <div class="page-shell">
-      <header class="topbar container">
+      <header class="topbar container" data-topbar>
         <a class="brand" href="#hero">СОТОЧКА</a>
         <nav class="nav">
           <a href="#about">О курсе</a>
@@ -318,9 +318,21 @@
     </div>
 
     <script>
+      const topbar = document.querySelector('[data-topbar]');
       const videoBlock = document.querySelector('[data-video-block]');
       const video = videoBlock?.querySelector('video');
       const playButton = videoBlock?.querySelector('[data-video-play]');
+
+      if (topbar) {
+        const updateTopbar = () => {
+          const maxScroll = 220;
+          const progress = Math.min(window.scrollY / maxScroll, 1);
+          topbar.style.setProperty('--topbar-progress', progress.toFixed(3));
+        };
+
+        updateTopbar();
+        window.addEventListener('scroll', updateTopbar, { passive: true });
+      }
 
       if (video && playButton) {
         const syncState = () => {
